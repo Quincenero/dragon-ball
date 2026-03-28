@@ -1,0 +1,268 @@
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body */
+body {
+    font-family: 'Bangers', cursive;
+    background: linear-gradient(to bottom, #f4f4f4, #e6e6e6);
+}
+
+/* Header */
+header {
+    background: #000;
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+}
+
+.logo {
+    width: 180px;
+    height: 100px;
+}
+
+/* Navegación */
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+nav a {
+    color: #fff;
+    font-size: 1.1em;
+    text-decoration: none;
+    position: relative;
+    font-weight: bold;
+}
+
+/* efecto hover pro */
+nav a::after {
+    content: "";
+    position: absolute;
+    width: 0%;
+    height: 2px;
+    background: #ff6600;
+    left: 0;
+    bottom: -5px;
+    transition: 0.3s;
+}
+
+nav a:hover::after {
+    width: 100%;
+}
+
+/* HERO (imagen principal) */
+.hero {
+    position: relative;
+    width: 100%;
+    height: 600px;
+    margin: 20px 0;
+    overflow: hidden;
+}
+
+.hero img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+
+/* Texto sobre imagen */
+.hero div {
+    position: absolute;
+    top: 80%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: transparent;
+    color: #fff;
+    padding: 25px;
+    border-radius: 10px;
+    text-align: center;
+    backdrop-filter: blur(5px);
+}
+
+.hero div h2 {
+    padding-bottom: 10px;
+    text-shadow: 
+        0 0 5px #fff,
+        0 0 10px #ffcc00,
+        0 0 20px #ff9900,
+        0 0 30px #ff6600;
+}
+
+/* Sección personajes */
+#personajes {
+    padding: 30px;
+    text-align: center;
+}
+
+#personajes h3 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+#personajes p {
+    color: #666;
+    margin-bottom: 20px;
+}
+
+/* GRID */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+}
+
+/* CARD */
+.card {
+    background: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px) scale(1.03);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+}
+
+.card img {
+    width: 100%;
+    height: 450px;
+    object-fit: fill;
+    display: block;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+.card h4 {
+    margin: 10px 0 5px;
+    font-size: 1.1em;
+    color: #333;
+}
+
+.card p {
+    margin: 5px 0;
+    font-size: 0.9em;
+}
+
+.card strong {
+    color: #ff6600;
+    text-shadow: 0 0 5px rgba(255,102,0,0.5);
+}
+
+footer {
+    background: #000;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+}
+
+footer a {
+    color: #ff6600;
+    margin: 0 10px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+footer a:hover {
+    text-shadow: 0 0 5px #ffcc00, 0 0 10px #ff6600;
+}
+
+/* Tablets: 768px - 1024px */
+@media screen and (max-width: 1024px) {
+    header {
+        padding: 10px 20px;
+    }
+
+    .logo {
+        width: 120px;
+        height: 80px;
+    }
+
+    nav ul {
+        gap: 15px;
+    }
+
+    .hero {
+        height: 450px;
+    }
+
+    .hero div {
+        top: 70%;
+        padding: 20px;
+    }
+
+    #personajes h3 {
+        font-size: 1.8rem;
+    }
+
+    .card img {
+        width: 100%;
+        height: 350px;
+    }
+}
+
+/* Móviles: hasta 767px */
+@media screen and (max-width: 800px) {
+    header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+        padding: 10px 15px;
+    }
+
+    nav ul {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .logo {
+        width: 100px;
+        height: 70px;
+    }
+
+    .hero {
+        height: 300px;
+    }
+
+    .hero div {
+        top: 65%;
+        padding: 15px;
+    }
+
+    #personajes h3 {
+        font-size: 1.5rem;
+    }
+
+    #personajes p {
+        font-size: 0.9rem;
+    }
+
+    .card img {
+        width: 100;
+        height: auto;
+    }
+
+    .card h4 {
+        font-size: 1em;
+    }
+
+    .card p {
+        font-size: 0.8rem;
+    }
+
+    footer a {
+        display: block;
+        margin: 5px 0;
+    }
+}
