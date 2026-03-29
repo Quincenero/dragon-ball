@@ -3,9 +3,63 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Personajes - Dragon Ball</title>
+    <title>🌕 Dragon Ball 🐉 - Personajes</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    
+    <header>
+        <div>
+            <img class="logo" src="./image/logo1.png" alt="Logo de Dragon Ball">
+        </div>
+        <nav>
+            <ul>
+                <li><a href="./index.html">Inicio</a></li>
+                <li><a href="./personajes.html" class="active">Personajes</a></li>
+                <li><a href="#">Animes</a></li>
+                <li><a href="#">Manga</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <img src="https://cdn.pixabay.com/photo/2017/04/12/23/52/crystal-2226170_1280.jpg" alt="Esferas del Dragón">
+            <div>
+                <h1>Dragon Ball Project</h1>
+                <p>Explora todos los personajes de Dragon Ball</p>
+            </div>
+        </section>
+
+        <input 
+            type="text" 
+            id="search" 
+            placeholder="Buscar por nombre, raza, afiliación o ki..."
+        >
+        <section id="personajes">
+            <h3>Personajes</h3>
+            <p>Listado completo de personajes (10 por página)</p>
+            <div id="personajes-container">
+                <!-- Aquí se renderizan los personajes desde script.js -->
+            </div>
+            <!-- La paginación se insertará dinámicamente después del contenedor -->
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-container">
+            <p>&copy; 2026 Dragon Ball Project. Todos los derechos reservados.</p>
+            <div class="footer-links">
+                <a href="./index.html">Inicio</a>
+                <a href="./personajes.html">Personajes</a>
+                <a href="#">Animes</a>
+                <a href="#">Manga</a>
+            </div>
+            <p>“¡Siente la energía y convierte tu Ki al máximo!”</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
 </body>
 </html>
