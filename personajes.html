@@ -11,14 +11,20 @@
 <body>
     <header>
         <div>
-            <img class="logo" src="./image/logo1.png" alt="Logo de Dragon Ball">
+            <img class="logo" src="./image/logo1.png" alt="Logo de Dragon Ball" >
         </div>
-        <nav>
-            <ul>
+        <nav class="navbar">
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+
+            <ul class="nav-links" id="nav-links">
                 <li><a href="./index.html">Inicio</a></li>
-                <li><a href="./personajes.html" class="active">Personajes</a></li>
+                <li><a href="./personajes.html">Personajes</a></li>
                 <li><a href="./animes.html">Animes</a></li>
-                <li><a href="./manga.html">Manga</a></li>
+                <li><a href="./mangas.html">Manga</a></li>
             </ul>
         </nav>
     </header>
@@ -58,7 +64,14 @@
             <p>“¡Siente la energía y convierte tu Ki al máximo!”</p>
         </div>
     </footer>
+    <script id="jsmenu">
+        const hamburger = document.getElementById("hamburger");
+        const navLinks = document.getElementById("nav-links");
 
+            hamburger.addEventListener("click", () => {
+            navLinks.classList.toggle("active");
+        });
+    </script>
     <script src="script.js"></script>
 </body>
 </html>

@@ -29,19 +29,39 @@ header {
 }
 
 /* Navegación */
-nav ul {
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+}
+
+/* Links */
+.nav-links {
     list-style: none;
     display: flex;
     gap: 20px;
+    
 }
 
-nav a {
-    color: #fff;
-    font-size: 1.1em;
+.nav-links a {
     text-decoration: none;
-    position: relative;
-    font-weight: bold;
-    padding-right: 30px;
+    color: white;
+    font-size: 1.2rem;
+}
+
+/* Hamburguesa */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+}
+
+.hamburger span {
+    background: white;
+    height: 3px;
+    width: 25px;
+    margin: 4px;
 }
 
 /* efecto hover pro */
@@ -159,9 +179,9 @@ nav a:hover::after {
 
 .card img {
     width: 100%;
-    height: 60vh;
+    height: 80vh;
     object-fit: cover;
-    object-position: center top;
+    object-position: center top ;
     border-radius: 8px;
 }
 
@@ -277,15 +297,27 @@ footer a:hover {
         margin-bottom: 40px;
     }
 
-    nav ul {
-        flex-direction: column;
-        gap: 10px;
+    .hamburger {
+        display: flex;
     }
 
-    .logo {
-        width: 100px;
-        height: 80px;
+    .nav-links {
+        position: absolute;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        background: #000;
+        flex-direction: column;
+        display: none;
+        padding-bottom: 15px;
     }
+
+    .nav-links.active {
+        display: flex;
+        align-items: end;
+        padding-right: 10px;
+    }
+
 
     .hero {
         background-image: url("https://upload.wikimedia.org/wikipedia/en/6/68/Dragon_Ball_Cast.PNG");
