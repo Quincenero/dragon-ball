@@ -1,4 +1,5 @@
 const container = document.getElementById("personajes-container");
+const searchInput = document.getElementById("search");
 
 let allCharacters = [];
 let currentCharacters = [];
@@ -9,31 +10,21 @@ const limit = 12;
 const esIndex = window.location.pathname.includes("index.html") || window.location.pathname === "/";
 const esPersonajes = window.location.pathname.includes("personajes.html");
 
-// FUNCIÓN PARA SCROLL AL INICIO DE LAS CARDS
+// SCROLL
 function scrollToTopOfCards() {
-    // Buscar la grid o la paginación superior
     const grid = document.querySelector('.grid');
     const paginationTop = document.querySelector('.pagination-top');
-    
+
     if (grid) {
-        // Scroll suave hasta la grid
-        grid.scrollIntoView({ 
-            behavior: 'smooth', 
-            block: 'start'
-        });
+        grid.scrollIntoView({ behavior: 'smooth', block: 'start' });
     } else if (paginationTop) {
-        // Si no hay grid, scroll a la paginación superior
-        paginationTop.scrollIntoView({ 
-            behavior: 'smooth', 
-            block: 'start'
-        });
+        paginationTop.scrollIntoView({ behavior: 'smooth', block: 'start' });
     } else {
-        // Fallback: scroll al contenedor principal
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 }
 
-// TRAER TODOS LOS PERSONAJES
+// TRAER TODOS LOS PERSONAJES (para búsqueda)
 async function getAllCharacters() {
     let all = [];
     let page = 1;
@@ -50,22 +41,15 @@ async function getAllCharacters() {
         }
         return all;
     } catch (error) {
-        console.error("Error cargando TODOS los personajes:", error);
+        console.error("Error cargando TODOS:", error);
         return [];
     }
 }
 
-async function initAllCharacters() {
-    if (container) {
-        container.innerHTML = "<p>Cargando base de datos...</p>";
-    }
-    allCharacters = await getAllCharacters();
-}
-
-// CARGAR PERSONAJES POR PÁGINA
+// CARGAR PERSONAJES
 async function loadCharacters(page = 1, shouldScroll = true) {
     if (!container) return;
-    
+
     try {
         container.innerHTML = "<p>Cargando personajes...</p>";
 
@@ -73,27 +57,26 @@ async function loadCharacters(page = 1, shouldScroll = true) {
         const data = await res.json();
 
         currentCharacters = data.items;
+        currentPage = data.meta.currentPage;
+
         renderCharacters(currentCharacters, data);
-        
-        // Scroll al inicio después de cargar
+
         if (shouldScroll) {
-            setTimeout(() => {
-                scrollToTopOfCards();
-            }, 100);
+            requestAnimationFrame(scrollToTopOfCards);
         }
 
     } catch (error) {
-        console.error("Error cargando personajes:", error);
-        container.innerHTML = "<p>Error al cargar personajes 😢</p>";
+        console.error("Error:", error);
+        container.innerHTML = "<p>Error al cargar 😢</p>";
     }
 }
 
 // RENDER
 function renderCharacters(characters, data = null) {
     if (!container) return;
-    
+
     if (characters.length === 0) {
-        container.innerHTML = "<p>No se encontraron personajes 😢</p>";
+        container.innerHTML = "<p>No se encontraron 😢</p>";
         return;
     }
 
@@ -117,65 +100,50 @@ function renderCharacters(characters, data = null) {
 
     // PERSONAJES (con paginación)
     if (esPersonajes && data) {
-        const currentPageNum = data.meta.currentPage;
         const totalPages = data.meta.totalPages;
-        
-        const paginationTopHTML = `
+
+        const pagination = `
             <div class="pagination pagination-top">
-                <button class="prev-btn" ${currentPageNum === 1 ? 'disabled' : ''}>⬅ Anterior</button>
-                <span>Página ${currentPageNum} de ${totalPages}</span>
-                <button class="next-btn" ${currentPageNum === totalPages ? 'disabled' : ''}>Siguiente ➡</button>
+                <button class="prev-btn" ${currentPage === 1 ? 'disabled' : ''}>⬅ Anterior</button>
+                <span>Página ${currentPage} de ${totalPages}</span>
+                <button class="next-btn" ${currentPage === totalPages ? 'disabled' : ''}>Siguiente ➡</button>
             </div>
         `;
 
-        const paginationBottomHTML = `
-            <div class="pagination pagination-bottom">
-                <button class="prev-btn" ${currentPageNum === 1 ? 'disabled' : ''}>⬅ Anterior</button>
-                <span>Página ${currentPageNum} de ${totalPages}</span>
-                <button class="next-btn" ${currentPageNum === totalPages ? 'disabled' : ''}>Siguiente ➡</button>
-            </div>
-        `;
+        const paginationBottom = pagination.replace("pagination-top", "pagination-bottom");
 
-        container.innerHTML = paginationTopHTML + gridHTML + paginationBottomHTML;
+        container.innerHTML = pagination + gridHTML + paginationBottom;
 
-        // Agregar eventos a TODOS los botones
-        const allPrevButtons = document.querySelectorAll('.prev-btn');
-        const allNextButtons = document.querySelectorAll('.next-btn');
-        
-        // Función para página anterior
-        const goToPrevPage = () => {
-            if (currentPage > 1) {
-                currentPage--;
-                loadCharacters(currentPage, true);
-            }
-        };
-        
-        // Función para página siguiente
-        const goToNextPage = () => {
-            if (currentPage < totalPages) {
-                currentPage++;
-                loadCharacters(currentPage, true);
-            }
-        };
-        
-        // Asignar eventos a todos los botones "Anterior"
-        allPrevButtons.forEach(btn => {
-            btn.onclick = goToPrevPage;
-        });
-        
-        // Asignar eventos a todos los botones "Siguiente"
-        allNextButtons.forEach(btn => {
-            btn.onclick = goToNextPage;
-        });
     } else {
         container.innerHTML = gridHTML;
     }
 }
 
-// BUSCADOR GLOBAL
-const searchInput = document.getElementById("search");
+// EVENT DELEGATION (PAGINACIÓN)
+if (container) {
+    container.addEventListener("click", (e) => {
+        if (e.target.classList.contains("prev-btn")) {
+            if (currentPage > 1) {
+                loadCharacters(currentPage - 1, true);
+            }
+        }
 
+        if (e.target.classList.contains("next-btn")) {
+            loadCharacters(currentPage + 1, true);
+        }
+    });
+}
+
+// BUSCADOR
 if (searchInput) {
+
+    // Cargar base de datos solo cuando el usuario empieza a usar el buscador
+    searchInput.addEventListener("focus", async () => {
+        if (allCharacters.length === 0) {
+            allCharacters = await getAllCharacters();
+        }
+    });
+
     searchInput.addEventListener("input", (e) => {
         const value = e.target.value.toLowerCase();
 
@@ -191,24 +159,16 @@ if (searchInput) {
             String(char.ki).includes(value)
         );
 
+        currentPage = 1; // reset
+
         renderCharacters(filtered, null);
-        
-        // Scroll al inicio de los resultados
-        setTimeout(() => {
-            const grid = document.querySelector('.grid');
-            if (grid) {
-                grid.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            } else {
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            }
-        }, 100);
+
+        requestAnimationFrame(scrollToTopOfCards);
     });
 }
 
 // INIT
 async function init() {
-    await initAllCharacters();
-
     if (esIndex) {
         loadCharacters(1, false);
     }
@@ -218,5 +178,4 @@ async function init() {
     }
 }
 
-// Iniciar la aplicación
 init();

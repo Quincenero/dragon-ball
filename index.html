@@ -5,7 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>🌕 Dragon Ball 🐉</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Bangers&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    
     <link rel="stylesheet" href="styles.css">
     
 </head>
@@ -31,12 +34,23 @@
     </header>
     
     <main>
+        <!-- Botón subir con imagen de internet -->
+        <a href="#top" class="dragon-ball-btn">
+            <img src="https://www.flayrah.com/sites/default/files/u/Sonious/Dragon%20Ball.jpg" alt="Esfera del dragón">
+        </a>
+
+
         <section class="hero">
             <div>
                 <h1>Dragon Ball Project</h1>
                 <p>Bienvenido a Dragon Ball </p>
             </div>
         </section>
+        <div>
+                <p class="resumen">Dragon Ball es un manga escrito y dibujado por Akira Toriyama.
+                    La historia sigue las aventuras de Goku desde su infancia hasta la edad adulta, mientras entrena en artes marciales y explora el mundo en busca de las siete esferas del dragón, que pueden conceder cualquier deseo cuando se reúnen. A lo largo de su viaje, Goku hace amigos y enemigos, participa en torneos de artes marciales y enfrenta a poderosos villanos que amenazan la paz del universo. La serie es conocida por sus emocionantes batallas, personajes carismáticos y su mezcla de humor y acción. Dragon Ball ha sido adaptada a varias series de anime, películas y videojuegos, convirtiéndose en una de las franquicias más populares y duraderas en la historia del manga y el anime.
+                </p>
+            </div>
 
         <input 
             type="text" 
@@ -66,14 +80,7 @@
     <p>“¡Siente la energía y convierte tu Ki al máximo!”</p>
   </div>
 </footer>
-   <script id="jsmenu">
-        const hamburger = document.getElementById("hamburger");
-        const navLinks = document.getElementById("nav-links");
-
-            hamburger.addEventListener("click", () => {
-            navLinks.classList.toggle("active");
-        });
-    </script>
+   <script src="./menu.js"> </script>        
     <script src="script.js"></script>
 
 </body>

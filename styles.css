@@ -9,7 +9,8 @@
 /* Body */
 body {
 
-    font-family: 'Bangers', cursive;
+    font-family: 'Roboto', sans-serif;
+    
 }
 
 /* Header */
@@ -45,9 +46,12 @@ header {
 }
 
 .nav-links a {
+    position: relative;
+    display: inline-block;
     text-decoration: none;
     color: white;
     font-size: 1.2rem;
+    transition: color 0.3s ease;
 }
 
 /* Hamburguesa */
@@ -73,12 +77,44 @@ nav a::after {
     background: #ff6600;
     left: 0;
     bottom: -5px;
-    transition: 0.3s;
+    transition: width 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: #ffcc00; /* cambia color al pasar */
 }
 
 nav a:hover::after {
-    width: 70%;
+    width: 100%;
 }
+
+/* Botón subir */
+.dragon-ball-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 70px;
+  height: 70px;
+  cursor: pointer;
+  z-index: 1000;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background: transparent;
+  box-shadow: 0 0 15px #ff6600;
+}
+
+.dragon-ball-btn img {
+  width: 100%;
+  height: auto;
+  border-radius: 50%;
+  background: transparent;
+  box-shadow: 0 0 15px #ff6600;
+}
+
+.dragon-ball-btn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 25px #ff6600;
+}
+
 
 /* HERO (imagen principal) */
 .hero {
@@ -86,7 +122,7 @@ nav a:hover::after {
     display: flex;
     flex-direction: column;       /* contenido apilado */
     align-items: center;
-    justify-content: center; /* contenido al fondo */
+    justify-content: flex-end; /* contenido al fondo */
     text-align: center;
     width: 100%;
     min-height: 100vh;             /* altura del banner */
@@ -95,31 +131,41 @@ nav a:hover::after {
     background-size: cover;       /* que cubra todo el área */
     background-position: center;  /* centrada */
     background-repeat: no-repeat;
+    overflow: hidden;
 }
 
 .hero::before {
     content: "";
     position: absolute;
-    inset: 1;
+    inset: 0;
+    background: rgba(0,0,0,0.1); /* capa oscura para resaltar texto */
+    z-index: 1;
 }
 
 /* Texto sobre imagen */
 .hero div {
     position: relative;
-    z-index: 2;
     color: #fff;
     padding: 20px;
     text-align: center;
-    margin-top: 120px;
-    
+    z-index: 1;
     /* Efecto de brillo estilo Dragon Ball */
     text-shadow: 
         0 0 5px #fff,
         0 0 10px #ffcc00,
         0 0 20px #ff9900,
         0 0 30px #ff6600;
+    font-size: 1.5rem;
 }
 
+/* Resumen */
+.resumen {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin: 20px auto;
+    max-width: 900px;
+    text-align: justify;
+}
 
 /* Sección personajes */
 #search {
@@ -179,10 +225,9 @@ nav a:hover::after {
 
 .card img {
     width: 100%;
-    height: 80vh;
-    object-fit: cover;
-    object-position: center top ;
-    border-radius: 8px;
+    height: 300px;
+    object-fit: contain;
+    object-position: top center;
 }
 
 .card h4 {
@@ -287,6 +332,8 @@ footer a:hover {
     opacity: 0.6;
 }
 
+
+
 /* Móviles: hasta 768px */
 @media (max-width: 768px) {
     header {
@@ -302,21 +349,29 @@ footer a:hover {
     }
 
     .nav-links {
-        position: absolute;
-        top: 70px;
-        left: 0;
-        width: 100%;
+        position: fixed;
+        top: 0;
+        right: 0;
+        width: 70%;
+        height: 100vh;
         background: #000;
+
+        display: flex;
         flex-direction: column;
-        display: none;
-        padding-bottom: 15px;
+        align-items: flex-start;
+        padding: 80px 20px;
+        gap: 25px;
+
+        transform: translateX(100%);
+        transition: transform 0.3s ease;
+
+        z-index: 999;
+        box-shadow: -5px 0 20px rgba(0,0,0,0.5);
     }
 
     .nav-links.active {
-        display: flex;
-        align-items: end;
-        padding-right: 10px;
-    }
+        transform: translateX(0);
+}
 
 
     .hero {
@@ -368,9 +423,8 @@ footer a:hover {
     }
 
     .card img {
-        width: 100%;
-        height: 250px;
-        height: auto;
+        height: 220px;
+       
     }
 
     .card h4 {
@@ -421,9 +475,6 @@ footer a:hover {
         height: 80px;
     }
 
-    nav ul {
-        gap: 15px;
-    }
 
    .hero {
     background-position: center;
@@ -431,6 +482,11 @@ footer a:hover {
     min-height: 50vh;   /*  elimina 100vh */
     height: auto;
    }
+
+   .resumen {
+    font-size: 1rem;
+    
+    }
 
     #personajes h3 {
         font-size: 1.8rem;
