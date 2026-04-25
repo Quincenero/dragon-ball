@@ -8,9 +8,7 @@
 
 /* Body */
 body {
-
     font-family: 'Roboto', sans-serif;
-    
 }
 
 /* Header */
@@ -20,7 +18,7 @@ header {
     color: #fff;
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items:center;
     box-shadow: 0 2px 10px rgba(0,0,0,0.5);
 }
 
@@ -41,7 +39,7 @@ header {
 .nav-links {
     list-style: none;
     display: flex;
-    gap: 20px;
+    gap: 30px;
     
 }
 
@@ -68,7 +66,7 @@ header {
     margin: 4px;
 }
 
-/* efecto hover pro */
+/* efecto hover linea debajo de los enlaces */
 nav a::after {
     content: "";
     position: absolute;
@@ -83,7 +81,7 @@ nav a::after {
 .nav-links a:hover {
     color: #ffcc00; /* cambia color al pasar */
 }
-
+/* ancho efecto hover linea debajo de los enlaces */
 nav a:hover::after {
     width: 100%;
 }
@@ -96,23 +94,22 @@ nav a:hover::after {
   width: 70px;
   height: 70px;
   cursor: pointer;
+  display: flex;
+  align-items: center;
   z-index: 1000;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  background: transparent;
-  box-shadow: 0 0 15px #ff6600;
+  justify-content: center;
 }
 
 .dragon-ball-btn img {
-  width: 100%;
-  height: auto;
-  border-radius: 50%;
-  background: transparent;
-  box-shadow: 0 0 15px #ff6600;
+  width: 160%;
+  height: 160%;
+  object-fit: contain;
+  display: block;
 }
 
 .dragon-ball-btn:hover {
   transform: scale(1.1);
-  box-shadow: 0 0 25px #ff6600;
+  
 }
 
 
@@ -248,9 +245,8 @@ nav a:hover::after {
 
 footer {
     background: #000;
-    color: #fff;
-    padding: 20px;
     text-align: center;
+    padding: 20px;
 }
 
 footer a {
@@ -258,6 +254,11 @@ footer a {
     margin: 0 10px;
     text-decoration: none;
     font-weight: bold;
+}
+footer p {
+    margin-top: 10px;
+    font-size: 0.9rem;
+    color: #666;
 }
 
 footer a:hover {
