@@ -1,0 +1,24 @@
+.dragonBall {
+  position: relative;
+  min-height: 100vh; /* ocupa toda la pantalla */
+  background: url('https://images.unsplash.com/photo-1763315371276-c2ae70c2947a?q=80&w=1179&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') 
+              no-repeat center center fixed;
+  background-size: cover; /* ajusta la imagen al tamaño del contenedor */
+}
+
+.dragonBall p {
+  position: relative;
+  z-index: 1; /* para que el texto esté por encima de la capa oscura */
+  color: #fff;
+  font-size: 1.2rem;
+  padding: 20px;
+}
+
+/* Capa translúcida encima del fondo */
+.dragonBall::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.4); /* ajustá la opacidad */
+  z-index: -1; /* para que esté debajo del texto */
+}
