@@ -479,8 +479,8 @@ footer a:hover {
 
    .hero {
     background-position: center;
-    background-size: contain;
-    min-height: 50vh;   /*  elimina 100vh */
+    background-size: cover;
+    min-height: 50vh;
     height: auto;
    }
 
